@@ -1,0 +1,9 @@
+tasks:
+   - name: install httpd
+     yum:
+      name: "{{ package }}"
+      state: present
+     register: output
+   - name: print json format
+     debug:
+	  var: package
