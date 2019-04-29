@@ -1,0 +1,15 @@
+---
+- name: tag playbook
+  hosts: production,backup
+  tasks: 
+   - name: compress the file
+     command: tar -cvzf /var/tmp/production.tar.gz /var/www/html
+     when: inventory_hostname in groups ['production']
+     tags:
+      - production
+   - name: compress the file
+     command: tar -cvzf /var/tmp/backup.tar.gz /var/log
+     when: inventory_hostname in groups ['backup']
+     tags:
+      - backup
+...

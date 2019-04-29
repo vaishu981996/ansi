@@ -1,0 +1,20 @@
+---
+- name: dummy playbook
+  hosts: production,backup
+  tasks:
+   - name: copy the file
+     copy:
+      src: /tmp/answer.txt
+      dest: /var/tmp/answer.txt
+     when: ansible_hostname in groups ['production']
+     tags:
+      - nodegroup1
+   - name: copy the file
+     copy:
+      src: /tmp/answer.txt
+      dest: /var/tmp/answer2.txt
+     when: ansible_hostname in groups ['backup']
+     tags:
+      - nodegroup2
+...
+

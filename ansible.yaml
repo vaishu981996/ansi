@@ -1,0 +1,10 @@
+---
+- name: ansible playbook 
+  hosts: node1,node2
+  tasks:
+   - name: create hostinfo file
+     copy:
+      content: "{{ ansible_hostname }}\n {{ ansible_default_ipv4.address }}\n {{ ansible_default_ipv4.macaddress }}\n"
+      dest: /var/tmp/hostinfo.html 
+      mode: 0644
+...

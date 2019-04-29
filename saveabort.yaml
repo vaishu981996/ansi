@@ -1,0 +1,18 @@
+---
+- name: saveabort playbook
+  hosts: node1,node2
+  tasks:
+   - block:
+      - name: check for the file
+        file:
+         path: /var/tmp/create.html
+      - name: print
+        debug:
+         msg: "File exists"
+     rescue:
+      - name: create the file
+        copy:
+         content: "file created in {{ ansible_hostname }}"
+         dest: /var/tmp/create.html
+         mode: 0644
+...
